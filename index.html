@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+
+    <style>
+        body{
+            margin: 0;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+        }
+    .calculator{
+        background-color: hsl(240,25%,30%);
+        width: 400px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    .displayarea{
+        background-color: black;
+        padding: 20px 35px 30px;
+        box-shadow: 1px 1px 15px gold;
+    }
+    .displayarea p{
+        color:greenyellow;
+        text-align: right;
+        margin-right: 20px;
+    }
+    #display-item{
+        width: 90%;
+        background-color: aquamarine;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: left;
+        font-size: 30px;
+        color: black;
+        font-weight: bold;
+    }
+    .keys{
+        padding: 30px;
+    }
+    button{
+        border: 0;
+        outline: 0;
+        width: 20%;
+        height: 50px;
+        margin: 2%;
+        border-radius: 10px;
+        border: none;
+        background: #3a4452;
+        box-shadow: -8px -8px 10px rgba(255,255,255,0.2), 35px 5px 15px rgba(0,0,0,0.3);;
+        cursor: pointer;
+        font-size: 24px;
+        color: white;
+        font-weight: 900;
+    }
+    button:hover{
+        background:hsl(0,0%,30%) ;
+    }
+    .operator{
+        background-color: goldenrod;
+    }
+    button.total{
+        width: 150px;
+    }
+    
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <div class="displayarea"><p>CASIO</p><input id="display-item" readonly></div>
+        <div class="keys">
+            <div>
+                <button onclick="appendToDisplay('1')">1</button>
+                <button onclick="appendToDisplay('2')">2</button>
+                <button onclick="appendToDisplay('3')">3</button>
+                <button onclick="appendToDisplay('+')" class="operator">+</button>
+            </div>
+            <div>
+                <button onclick="appendToDisplay('4')">4</button>
+                <button onclick="appendToDisplay('5')">5</button>
+                <button onclick="appendToDisplay('6')">6</button>
+                <button onclick="appendToDisplay('-')" class="operator">-</button>
+            </div>
+            <div>
+                <button onclick="appendToDisplay('7')">7</button>
+                <button onclick="appendToDisplay('8')">8</button>
+                <button onclick="appendToDisplay('9')">9</button>
+                <button onclick="appendToDisplay('*')" class="operator">x</button>
+            </div>
+            <div>
+                <button onclick="appendToDisplay('0')">0</button>
+                <button onclick="appendToDisplay('.')">.</button>
+                <button onclick="getsquareroot()" class="operator">√</button>
+                <button onclick="appendToDisplay('/')" class="operator">÷</button>
+            </div>
+            <div>
+                <button onclick="backspacekey()">DEL</button>
+                <button onclick="cleardisplay()">AC</button>
+                <button onclick="calculate()" class="total">Total</button>
+            </div>
+        </div>
+    </div>
+<script>
+    const displayitem = document.getElementById("display-item");
+
+    function appendToDisplay(input){
+        displayitem.value = displayitem.value + input;
+    }
+
+    function getsquareroot(){
+        if(isNaN(displayitem.value)){
+            displayitem.value = "Error"
+        } else { displayitem.value=Math.sqrt(displayitem.value)
+
+        }        
+    }
+
+    function backspacekey(){
+        displayitem.value = displayitem.value.slice(0,-1);
+
+    }
+
+    function cleardisplay(){
+        displayitem.value = ""; 
+    }
+
+    function calculate(input){
+        try{
+            if(displayitem.value)
+            displayitem.value = eval(displayitem.value);
+        } catch(error){ displayitem.value="Error"};
+    }   
+</script>
+</body>
+</html>
